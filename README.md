@@ -1,5 +1,7 @@
 # 🟩 Grid Wars
 
+**Live Demo: [https://grid-wars-rr0o.onrender.com/](https://grid-wars-rr0o.onrender.com/)**
+
 ![Grid Wars Logo](logo.png)
 
 Grid Wars is a real-time, multiplayer territory capture game. Everyone plays on the same 20x20 grid, and the goal is simple: capture as many blocks as you can to climb the leaderboard.
