@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #06060b;
+    color: #eaeaf0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* noise texture */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@layer components {
+  /* aceternity: background beams svg */
+  .background-beams {
+    @apply fixed inset-0 w-full h-full pointer-events-none opacity-50;
+    z-index: 0;
+  }
+
+  /* aceternity: sparkles */
+  .sparkles-container {
+    @apply absolute inset-0 overflow-hidden pointer-events-none;
+    z-index: 0;
+  }
+
+  /* aceternity: meteors */
+  .meteors-container {
+    @apply absolute inset-0 overflow-hidden pointer-events-none;
+    z-index: 0;
+  }
+
+  /* aceternity: card spotlight */
+  .card-spotlight-outer {
+    @apply relative overflow-hidden rounded-2xl;
+  }
+
+  .card-spotlight-glow {
+    @apply absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300;
+    z-index: 1;
+  }
+
+  .card-spotlight-outer:hover .card-spotlight-glow {
+    @apply opacity-100;
+  }
+
+  .card-spotlight-content {
+    @apply relative;
+    z-index: 2;
+  }
+
+  /* aceternity: moving border */
+  .moving-border-outer {
+    @apply relative overflow-hidden rounded-2xl;
+    padding: 1px;
+  }
+
+  .moving-border-gradient {
+    @apply absolute;
+    inset: -50%;
+    z-index: 0;
+  }
+
+  .moving-border-inner {
+    @apply relative rounded-2xl p-4;
+    z-index: 1;
+    background: rgba(20, 20, 32, 0.6);
+  }
+
+  /* grid dot background */
+  .grid-dot-bg {
+    @apply absolute inset-0 pointer-events-none;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+    z-index: 0;
+  }
+
+  /* grid block animations */
+  .grid-block-base {
+    @apply aspect-square cursor-pointer relative border border-transparent transition-all duration-150;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .grid-block-base.captured {
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.04);
+  }
+
+  .grid-block-base.mine {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.06);
+  }
+
+  .grid-block-base.just-captured {
+    animation: blockGlow 0.6s ease-out;
+  }
+
+  /* leaderboard rank medals */
+  .rank-gold {
+    background: linear-gradient(135deg, #FFD700, #FF8C00);
+    color: #0a0a0f;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+  }
+
+  .rank-silver {
+    background: linear-gradient(135deg, #C0C0C0, #888);
+    color: #0a0a0f;
+  }
+
+  .rank-bronze {
+    background: linear-gradient(135deg, #CD7F32, #8B4513);
+    color: #0a0a0f;
+  }
+
+  /* cooldown bar gradient */
+  .cooldown-ready {
+    background: linear-gradient(90deg, #00B894, #55EFC4);
+  }
+
+  .cooldown-active {
+    background: linear-gradient(90deg, #6C5CE7, #a29bfe);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #fff 0%, #a29bfe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-stat {
+    background: linear-gradient(135deg, #fff 30%, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    background: rgba(20, 20, 32, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-hover:hover {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 30px rgba(108, 92, 231, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+
+  .glow-soft {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 0 60px rgba(108, 92, 231, 0.05);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar { width: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 2px; }
+
+  .scrollbar-xs::-webkit-scrollbar { width: 3px; }
+  .scrollbar-xs::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 2px; }
+}
+
+/* keyframe for blockGlow (referenced by component class) */
+@keyframes blockGlow {
+  0% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.5); }
+  50% { box-shadow: 0 0 15px 3px rgba(108, 92, 231, 0.3); }
+  100% { box-shadow: 0 0 6px rgba(255, 255, 255, 0.04); }
+}
+
+/* HIGH PERFORMANCE GRID CELL ANIMATIONS */
+.grid-cell {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.grid-cell:hover {
+  transform: scale(1.15);
+  z-index: 20;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+.grid-cell:active {
+  transform: scale(0.9);
+  transition: all 0.05s ease-out;
+}
+
+.grid-cell.claimed {
+  background-color: var(--cell-color);
+  color: var(--cell-color);
+  opacity: 0.85;
+}
+
+.grid-cell.claimed.mine {
+  opacity: 1;
+}
+
+.grid-cell.claimed:hover {
+  box-shadow: 0 0 20px var(--cell-color);
+}
+
+@keyframes cellCapture {
+  0% { transform: scale(1); box-shadow: 0 0 0px var(--cell-color); z-index: 30; }
+  50% { transform: scale(1.35); box-shadow: 0 0 30px var(--cell-color); z-index: 30; border-radius: 6px; }
+  100% { transform: scale(1); box-shadow: 0 0 5px var(--cell-color); z-index: 1; border-radius: 3px; }
+}
+
+.grid-cell.just-captured {
+  animation: cellCapture 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}

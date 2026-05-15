@@ -1,0 +1,7 @@
+node_modules/
+client/node_modules/
+server/node_modules/
+client/dist/
+server/grid_state.json
+.env
+.DS_Store
